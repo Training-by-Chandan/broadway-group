@@ -3,4 +3,8 @@ public class name {
 int i=10;
 
 string a="1";
+void main()
+{
+    
+}
 }
