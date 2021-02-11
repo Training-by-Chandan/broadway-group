@@ -8,5 +8,10 @@ namespace Broadway.ConsoleApp.Subject
 {
     public class Math
     {
+        public void Add(decimal a, decimal b)
+        {
+            var result = a + b;
+            Console.WriteLine($"Addition {result}");
+        }
     }
 }

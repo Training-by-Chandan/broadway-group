@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{32963B3D-40D3-46F5-B3ED-1366379BB469}</ProjectGuid>
+    <ProjectGuid>{789255C6-AD8E-41A0-84B4-1DE94E897A05}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>Broadway.ConsoleApp</RootNamespace>
-    <AssemblyName>Broadway.ConsoleApp</AssemblyName>
+    <RootNamespace>ConsoleApp1</RootNamespace>
+    <AssemblyName>ConsoleApp1</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -43,10 +43,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Subject\Math.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TestClass.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -55,10 +53,6 @@
     <ProjectReference Include="..\Broadway.Project.Models\Broadway.Project.Models.csproj">
       <Project>{3c9887c7-115e-4c64-8527-06a1f4eda6ab}</Project>
       <Name>Broadway.Project.Models</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Broadway.VB\Broadway.VB.vbproj">
-      <Project>{7939762e-761a-4776-bea4-5c62510fbbb2}</Project>
-      <Name>Broadway.VB</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

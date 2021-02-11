@@ -3,9 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Logic=Broadway.ConsoleApp.Logic;
-using MathSub = Broadway.ConsoleApp.Subject.Math;
-using Sub= Broadway.ConsoleApp.Subject;
+using m = Broadway.Project.Models.Logic;
 using Broadway.Project.Models;
 using Broadway.VB;
 
@@ -15,7 +13,9 @@ namespace Broadway.ConsoleApp
     {
         static void Main(string[] args)
         {
-            MathOps();
+            //MathOps();
+            //MathPart2();
+
 
             Console.ReadLine();
         }
@@ -30,7 +30,7 @@ namespace Broadway.ConsoleApp
             var num_a = Convert.ToDecimal(a);
             var num_b = Convert.ToDecimal(b);
 
-            Logic.Math math=new Logic.Math();
+            m.Math math = new m.Math();
 
             Console.WriteLine("Addition "+math.Add(num_a, num_b));
 
@@ -40,14 +40,15 @@ namespace Broadway.ConsoleApp
 
             Console.WriteLine($"Division {math.Divide(num_a, num_b)}");
 
+            //math.Remainder
+
         }
 
-
+        public static void MathPart2()
+        {
+            Subject.Math m1 = new Subject.Math();
+            m1.Add(12, 2);
+        }
     }
 
-
-   
-
-    
-   
 }

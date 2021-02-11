@@ -4,13 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Broadway.ConsoleApp.Logic
+namespace Broadway.Project.Models.Logic
 {
     public class Math
     {
         public decimal Add(decimal a, decimal b)
         {
-            return a + b;
+            return a - b;
         }
 
         public decimal Subtract(decimal a, decimal b)
@@ -26,6 +26,10 @@ namespace Broadway.ConsoleApp.Logic
         public decimal Divide(decimal a, decimal b)
         {
             return a / b;
+        }
+        public decimal Remainder(decimal a, decimal b)
+        {
+            return a % b;
         }
     }
 }
