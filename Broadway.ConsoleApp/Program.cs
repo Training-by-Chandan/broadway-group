@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using m = Broadway.Project.Models.Logic;
 using Broadway.Project.Models;
 using Broadway.VB;
+using Broadway.Project.Models.Inheritence;
 
 namespace Broadway.ConsoleApp
 {
@@ -16,7 +17,7 @@ namespace Broadway.ConsoleApp
             //MathOps();
             //MathPart2();
 
-
+            InheritenceExample();
             Console.ReadLine();
         }
 
@@ -48,6 +49,16 @@ namespace Broadway.ConsoleApp
         {
             Subject.Math m1 = new Subject.Math();
             m1.Add(12, 2);
+        }
+
+        static void InheritenceExample()
+        {
+            Transportation t = new Transportation();
+            Transportation lt = new LandTransport();
+            LandTransport lt2 = new LandTransport();
+            t.FunctionOne();
+            lt.FunctionOne();
+            lt2.FunctionOne();
         }
     }
 
