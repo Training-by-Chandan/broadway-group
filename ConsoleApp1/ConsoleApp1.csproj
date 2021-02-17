@@ -49,11 +49,5 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Broadway.Project.Models\Broadway.Project.Models.csproj">
-      <Project>{3c9887c7-115e-4c64-8527-06a1f4eda6ab}</Project>
-      <Name>Broadway.Project.Models</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
