@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using Broadway.ConsoleApp.Extension;
 
 namespace Broadway.ConsoleApp
 {
@@ -21,9 +21,14 @@ namespace Broadway.ConsoleApp
             //ArrayExample();
             //ListExample();
 
-            StudentModelExample();
+            //StudentModelExample();
 
-            Console.ReadLine();
+            //UsingConvertClass();
+
+            //ConvertClasses();
+            
+            
+            Console.ReadLine(); // Using this so that we can pause the output window till enter key is pressed.
         }
 
         
@@ -147,9 +152,69 @@ namespace Broadway.ConsoleApp
 
             List<Student> students = new List<Student>();
         }
+
+        static void UsingConvertClass()
+        {
+            //we use Convert class to convert from one type to another type. We can use only those functions which are defined in the Convert Class
+
+            int i = 10;
+            var j = Convert.ToChar(i);
+            var k = Convert.ToString(i);
+            var l = Convert.ToBoolean(i);
+
+
+
+            Console.WriteLine("Char => " + j);
+            Console.WriteLine("String => " + k);
+            Console.WriteLine("Boolean => " + l);
+
+        }
+
+        static void UsingNormalCasting()
+        {
+            //we can convert from any one type to another 
+            int i = 10;
+            var j = (char)i;
+            var k = i.ToString();
+            
+
+            Console.WriteLine("Char => " + j);
+            Console.WriteLine("String => " + k);
+            
+
+        }
+
+
+        static void ConvertClasses()
+        {
+            Human h = new Human();
+            Teacher t = new Teacher();
+            Student s = new Student();
+            
+            
+            var h_t = t as Human;
+            var h_s = s as Human;
+
+            var h_t_1 = (Human)t;
+            var h_s_1 = (Human)s;
+
+            h_t = h_s;
+        }
+
+
     }
 
-    public class Student
+    public class Human
+    {
+
+    }
+
+    public class Teacher : Human
+    {
+
+    }
+
+    public class Student : Human
     {
         public int Id { get; set; }
         public string FName { get; set; }
