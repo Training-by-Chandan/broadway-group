@@ -13,5 +13,6 @@ namespace Broadway.ConsoleApp.Subject
             var result = a + b;
             Console.WriteLine($"Addition {result}");
         }
+
     }
 }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Broadway.ConsoleApp.Extension;
+using Broadway.ConsoleApp.SchoolModule;
 
 namespace Broadway.ConsoleApp
 {
@@ -11,6 +12,8 @@ namespace Broadway.ConsoleApp
     {
         static void Main(string[] args)
         {
+            #region Unused Functions
+
             //MathOps();
             //MathPart2();
 
@@ -26,12 +29,14 @@ namespace Broadway.ConsoleApp
             //UsingConvertClass();
 
             //ConvertClasses();
-            
-            
+            #endregion
+
+            ExceptionExample();
+
             Console.ReadLine(); // Using this so that we can pause the output window till enter key is pressed.
         }
 
-        
+        #region functions
 
         public static void MathOps()
         {
@@ -199,6 +204,38 @@ namespace Broadway.ConsoleApp
             var h_s_1 = (Human)s;
 
             h_t = h_s;
+        }
+
+        #endregion
+        static void ExceptionExample()
+        {
+            try
+            {
+                Marks m1 = new Marks();
+                m1.Name = "Anchal";
+                m1.Computer = 101;
+                m1.Math = 12;
+
+                m1.isValid();
+
+             
+            }
+            catch(ComputerMarksNotValidException e)
+            {
+                Console.WriteLine("Wrong computer marks");
+            }
+            catch(MathMarksNotValidException e)
+            {
+                Console.WriteLine("Wrong math marks");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Something wrong happened");
+            }
+            finally
+            {
+                Console.WriteLine("Everything is Sorted and Handled");
+            }
         }
 
 
