@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Broadway.ConsoleApp.Extension;
+using Broadway.ConsoleApp.Interface;
 using Broadway.ConsoleApp.SchoolModule;
 
 namespace Broadway.ConsoleApp
@@ -31,7 +32,10 @@ namespace Broadway.ConsoleApp
             //ConvertClasses();
             #endregion
 
-            ExceptionExample();
+            //ExceptionExample();
+
+
+            InterfaceExample();
 
             Console.ReadLine(); // Using this so that we can pause the output window till enter key is pressed.
         }
@@ -238,7 +242,27 @@ namespace Broadway.ConsoleApp
             }
         }
 
+        static void InterfaceExample()
+        {
+            IStudent s1;
+            Boy b1 = new Boy();
+            b1.StudentFunction();
+            
+            s1 = b1;
+            
+            s1.StudentFunction();
+           
+            Girl g1 = new Girl();
+            g1.StudentFunction();
+            s1 = g1;
+            s1.StudentFunction();
 
+
+            IStudent[] listofStudent = new IStudent[10];
+            listofStudent[0] = b1;
+            listofStudent[1] = g1;
+
+        }
     }
 
     public class Human
