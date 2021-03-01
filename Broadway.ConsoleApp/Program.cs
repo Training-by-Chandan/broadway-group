@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Broadway.ConsoleApp.AbstractClass;
 using Broadway.ConsoleApp.Extension;
 using Broadway.ConsoleApp.Interface;
 using Broadway.ConsoleApp.SchoolModule;
@@ -35,8 +36,11 @@ namespace Broadway.ConsoleApp
             //ExceptionExample();
 
 
-            InterfaceExample();
+            //InterfaceExample();
 
+            //IShapeExample();
+
+            AbstractClassExample();
             Console.ReadLine(); // Using this so that we can pause the output window till enter key is pressed.
         }
 
@@ -262,6 +266,40 @@ namespace Broadway.ConsoleApp
             listofStudent[0] = b1;
             listofStudent[1] = g1;
 
+        }
+
+            static IShape s1;
+        static void IShapeExample()
+        {
+            
+            Console.WriteLine("Press\n1 for Rectangle\n2 for Triangle\n3 for Circle");
+            var item = Convert.ToInt32(Console.ReadLine());
+            switch (item)
+            {
+                case 1:
+                    s1 = new Rectangle();
+                    break;
+                case 2:
+                    s1 = new Triangle();
+                    break;
+                case 3:
+                    s1 = new Circle();
+                    break;
+                default:
+                    break;
+            }
+
+            s1.GetInput();
+            s1.Area();
+            s1.Perimeter();
+
+        }
+
+        static void AbstractClassExample()
+        {
+            Pig myPig = new Pig();  // Create a Pig object
+            myPig.animalSound();
+            myPig.sleep();
         }
     }
 
