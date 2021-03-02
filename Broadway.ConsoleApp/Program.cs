@@ -14,6 +14,11 @@ namespace Broadway.ConsoleApp
     {
         static void Main(string[] args)
         {
+            string res = "N";
+            do
+            {
+
+
             #region Unused Functions
 
             //MathOps();
@@ -40,7 +45,14 @@ namespace Broadway.ConsoleApp
 
             //IShapeExample();
 
-            AbstractClassExample();
+            //AbstractClassExample();
+
+            EnumExample();
+
+                Console.WriteLine("Continue (Y/N)");
+                res = Console.ReadLine();
+            } while (res.ToUpper() == "Y");
+
             Console.ReadLine(); // Using this so that we can pause the output window till enter key is pressed.
         }
 
@@ -300,6 +312,37 @@ namespace Broadway.ConsoleApp
             Pig myPig = new Pig();  // Create a Pig object
             myPig.animalSound();
             myPig.sleep();
+            var test=myPig.StrReadonly ;
+            var t=Pig.StrConstant;
+
+            Pig newPig = new Pig("I am from Program.cs file");
+
+        }
+
+        static void EnumExample()
+        {
+            Console.WriteLine("Enter Number");
+            var num = Convert.ToInt32(Console.ReadLine());
+
+            var days = (Days)num;
+
+            
+            switch (days)
+            {
+                case Days.Sunday:
+                case Days.Saturday:
+                    Console.WriteLine("Its Weekend! Enjoy");
+                    break;
+                case Days.Monday:
+                case Days.Tuesday:
+                case Days.Wednesday:
+                case Days.Thursday:
+                case Days.Friday:
+                    Console.WriteLine("Its Weekdays, Lets get working");
+                    break;
+
+              
+            }
         }
     }
 
@@ -366,6 +409,17 @@ namespace Broadway.ConsoleApp
         {
             return Name + "_" + i;
         }
+    }
+
+    public enum Days
+    {
+        Sunday=0, 
+        Monday=1,
+        Tuesday=2, 
+        Wednesday=3, 
+        Thursday=4, 
+        Friday=5, 
+        Saturday=6
     }
 
 }

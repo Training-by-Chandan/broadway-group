@@ -20,6 +20,20 @@ namespace Broadway.ConsoleApp.AbstractClass
     // Derived class (inherit from Animal)
     class Pig : Animal
     {
+        public readonly string StrReadonly = "Readonly";
+        public const string StrConstant = "Constant";
+
+        public Pig()
+        {
+            this.StrReadonly = "Readonly from Constructor";
+           
+        }
+
+        public Pig(string str)
+        {
+            this.StrReadonly = str;
+        }
+
         public override void animalSound()
         {
             // The body of animalSound() is provided here
