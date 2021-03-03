@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,35 +20,37 @@ namespace Broadway.ConsoleApp
             {
 
 
-            #region Unused Functions
+                #region Unused Functions
 
-            //MathOps();
-            //MathPart2();
+                //MathOps();
+                //MathPart2();
 
-            //InheritenceExample();
-            //StaticAndNonStaticExample();
+                //InheritenceExample();
+                //StaticAndNonStaticExample();
 
-            //TypeDefs();
-            //ArrayExample();
-            //ListExample();
+                //TypeDefs();
+                //ArrayExample();
+                //ListExample();
 
-            //StudentModelExample();
+                //StudentModelExample();
 
-            //UsingConvertClass();
+                //UsingConvertClass();
 
-            //ConvertClasses();
-            #endregion
+                //ConvertClasses();
+                #endregion
 
-            //ExceptionExample();
+                //ExceptionExample();
 
 
-            //InterfaceExample();
+                //InterfaceExample();
 
-            //IShapeExample();
+                //IShapeExample();
 
-            //AbstractClassExample();
+                //AbstractClassExample();
 
-            EnumExample();
+                //EnumExample();
+
+                FileExample();
 
                 Console.WriteLine("Continue (Y/N)");
                 res = Console.ReadLine();
@@ -343,6 +346,20 @@ namespace Broadway.ConsoleApp
 
               
             }
+        }
+
+
+            static FileStream fs;
+        static void FileExample()
+        {
+            Console.WriteLine("Enter the string that you want to write in file");
+            var str = Console.ReadLine();
+            str += "\n";
+            var bytes = Encoding.ASCII.GetBytes(str);
+            fs = File.Open("nbc.txt", FileMode.Append);
+            
+            fs.Write(bytes, 0, bytes.Length);
+            fs.Close();
         }
     }
 
