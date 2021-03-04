@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Broadway.ConsoleApp.AbstractClass;
+using Broadway.ConsoleApp.Delegates;
 using Broadway.ConsoleApp.Extension;
 using Broadway.ConsoleApp.Interface;
 using Broadway.ConsoleApp.SchoolModule;
@@ -18,8 +19,6 @@ namespace Broadway.ConsoleApp
             string res = "N";
             do
             {
-
-
                 #region Unused Functions
 
                 //MathOps();
@@ -37,7 +36,6 @@ namespace Broadway.ConsoleApp
                 //UsingConvertClass();
 
                 //ConvertClasses();
-                #endregion
 
                 //ExceptionExample();
 
@@ -50,7 +48,11 @@ namespace Broadway.ConsoleApp
 
                 //EnumExample();
 
-                FileExample();
+                //FileExample();
+                #endregion
+                //ReferenceExample();
+
+                DelegateEventsExample();
 
                 Console.WriteLine("Continue (Y/N)");
                 res = Console.ReadLine();
@@ -229,7 +231,6 @@ namespace Broadway.ConsoleApp
             h_t = h_s;
         }
 
-        #endregion
         static void ExceptionExample()
         {
             try
@@ -360,6 +361,54 @@ namespace Broadway.ConsoleApp
             
             fs.Write(bytes, 0, bytes.Length);
             fs.Close();
+        }
+
+        #endregion
+
+        static void ReferenceExample()
+        {
+            int j = 5;
+            Add(j);
+            Console.WriteLine(j);
+            AddRef(ref j);
+            Console.WriteLine(j);
+
+            int outval = 0;
+            AddOut(j, out outval);
+            Console.WriteLine("j=>"+j);
+            Console.WriteLine("Out => "+outval);
+
+        }
+
+        static void Add(int i)
+        {
+            i = i + 1;
+        }
+
+        static void AddRef(ref int i) 
+        { 
+            i = i + 1; 
+        }
+
+        static void AddOut (int j, out int i)
+        {
+            i = j + 1;
+        }
+
+
+        static void DelegateEventsExample()
+        {
+            TestButton tb = new TestButton();
+            tb.button1.ClickEvent += Button1_ClickEvent;
+            tb.RegisterFunction();
+            tb.RegisterFunction();
+            tb.button1.Call();
+        }
+
+        private static int Button1_ClickEvent(int i, int j)
+        {
+            Console.WriteLine("Calling from program.cs");
+            return 0;
         }
     }
 

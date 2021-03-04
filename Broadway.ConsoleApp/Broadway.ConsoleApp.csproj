@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AbstractClass\Animal.cs" />
+    <Compile Include="Delegates\Button.cs" />
     <Compile Include="Extension\StringExtension.cs" />
     <Compile Include="Interface\Interface1.cs" />
     <Compile Include="Interface\IShape.cs" />
