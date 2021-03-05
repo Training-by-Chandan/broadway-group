@@ -372,6 +372,7 @@ namespace Broadway.ConsoleApp
             Console.WriteLine(j);
             AddRef(ref j);
             Console.WriteLine(j);
+            j=AddNUmber(j);
 
             int outval = 0;
             AddOut(j, out outval);
@@ -383,6 +384,10 @@ namespace Broadway.ConsoleApp
         static void Add(int i)
         {
             i = i + 1;
+        }
+        static int AddNUmber(int i)
+        {
+            return i + 1;
         }
 
         static void AddRef(ref int i) 
@@ -400,9 +405,16 @@ namespace Broadway.ConsoleApp
         {
             TestButton tb = new TestButton();
             tb.button1.ClickEvent += Button1_ClickEvent;
+            tb.button1.ClickEvent += TestEventFunction;
             tb.RegisterFunction();
             tb.RegisterFunction();
             tb.button1.Call();
+        }
+
+        private static int TestEventFunction(int i, int j)
+        {
+            Console.WriteLine("Calling from new function testeventfunction");
+            return 100;
         }
 
         private static int Button1_ClickEvent(int i, int j)
