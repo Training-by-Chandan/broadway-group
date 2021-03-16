@@ -101,8 +101,8 @@ namespace Broadway.Desktop
 
         private void helpToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Form1 f1 = new Form1();
-            f1.Show();
+            //Form1 f1 = new Form1();
+            //f1.Show();
         }
 
         private void Form2_KeyPress(object sender, KeyPressEventArgs e)
