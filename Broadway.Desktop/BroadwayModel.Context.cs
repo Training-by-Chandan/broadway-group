@@ -12,13 +12,11 @@ namespace Broadway.Desktop
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
-    using System.Data.Entity.Core.Objects;
-    using System.Linq;
     
-    public partial class BroadwayEntities : DbContext
+    public partial class Broadway_Entities : DbContext
     {
-        public BroadwayEntities()
-            : base("name=BroadwayEntities")
+        public Broadway_Entities()
+            : base("name=Broadway_Entities")
         {
         }
     
@@ -32,32 +30,5 @@ namespace Broadway.Desktop
         public virtual DbSet<StudentParent> StudentParents { get; set; }
         public virtual DbSet<Table1> Table1 { get; set; }
         public virtual DbSet<Table2> Table2 { get; set; }
-        public virtual DbSet<StudentParentView> StudentParentViews { get; set; }
-    
-        public virtual int Procedure(Nullable<int> primaryKey, string name)
-        {
-            var primaryKeyParameter = primaryKey.HasValue ?
-                new ObjectParameter("primaryKey", primaryKey) :
-                new ObjectParameter("primaryKey", typeof(int));
-    
-            var nameParameter = name != null ?
-                new ObjectParameter("name", name) :
-                new ObjectParameter("name", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Procedure", primaryKeyParameter, nameParameter);
-        }
-    
-        public virtual ObjectResult<ProcTest_Result> ProcTest(Nullable<int> param1, Nullable<int> param2)
-        {
-            var param1Parameter = param1.HasValue ?
-                new ObjectParameter("param1", param1) :
-                new ObjectParameter("param1", typeof(int));
-    
-            var param2Parameter = param2.HasValue ?
-                new ObjectParameter("param2", param2) :
-                new ObjectParameter("param2", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ProcTest_Result>("ProcTest", param1Parameter, param2Parameter);
-        }
     }
 }

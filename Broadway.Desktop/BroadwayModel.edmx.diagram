@@ -4,13 +4,14 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="e78b052988c44cf18b11073dea120947" Name="Diagram1">
-        <EntityTypeShape EntityType="BroadwayModel.Parent" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="BroadwayModel.Student" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="BroadwayModel.StudentParent" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="BroadwayModel.Table1" Width="1.5" PointX="2.75" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="BroadwayModel.Table2" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="BroadwayModel.StudentParentView" Width="1.5" PointX="4.75" PointY="3.75" IsExpanded="true" />
+      <Diagram DiagramId="454b6e408dd245df98c5688625697c7a" Name="Diagram1">
+        <EntityTypeShape EntityType="BroadwayModel.Parent" Width="1.5" PointX="0.75" PointY="3.875" />
+        <EntityTypeShape EntityType="BroadwayModel.Student" Width="1.5" PointX="0.75" PointY="0.875" />
+        <EntityTypeShape EntityType="BroadwayModel.StudentParent" Width="1.5" PointX="3" PointY="0.875" />
+        <EntityTypeShape EntityType="BroadwayModel.Table1" Width="1.5" PointX="2.75" PointY="3.75" />
+        <EntityTypeShape EntityType="BroadwayModel.Table2" Width="1.5" PointX="4.75" PointY="3.75" />
+        <AssociationConnector Association="BroadwayModel.FK_StudentParent_ToParent" />
+        <AssociationConnector Association="BroadwayModel.FK_StudentParent_ToStudent" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

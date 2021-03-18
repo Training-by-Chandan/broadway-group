@@ -55,11 +55,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BroadwayDataSet.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>BroadwayDataSet.xsd</DependentUpon>
-    </Compile>
+    <Compile Include="AdmissionService.cs" />
     <Compile Include="BroadwayModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -96,24 +92,18 @@
     <Compile Include="Parent.cs">
       <DependentUpon>BroadwayModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="ProcTest_Result.cs">
-      <DependentUpon>BroadwayModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Student.cs">
       <DependentUpon>BroadwayModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="StudentName.cs">
+    <Compile Include="StudentForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="StudentName.Designer.cs">
-      <DependentUpon>StudentName.cs</DependentUpon>
+    <Compile Include="StudentForm.Designer.cs">
+      <DependentUpon>StudentForm.cs</DependentUpon>
     </Compile>
     <Compile Include="StudentParent.cs">
-      <DependentUpon>BroadwayModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="StudentParentView.cs">
       <DependentUpon>BroadwayModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Table1.cs">
@@ -140,24 +130,13 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="StudentName.resx">
-      <DependentUpon>StudentName.cs</DependentUpon>
+    <EmbeddedResource Include="StudentForm.resx">
+      <DependentUpon>StudentForm.cs</DependentUpon>
     </EmbeddedResource>
     <EntityDeploy Include="BroadwayModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>BroadwayModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="BroadwayDataSet.xsc">
-      <DependentUpon>BroadwayDataSet.xsd</DependentUpon>
-    </None>
-    <None Include="BroadwayDataSet.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>BroadwayDataSet.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="BroadwayDataSet.xss">
-      <DependentUpon>BroadwayDataSet.xsd</DependentUpon>
-    </None>
     <None Include="BroadwayModel.edmx.diagram">
       <DependentUpon>BroadwayModel.edmx</DependentUpon>
     </None>
@@ -176,19 +155,19 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="BroadwayModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>BroadwayModel.Context.cs</LastGenOutput>
       <DependentUpon>BroadwayModel.edmx</DependentUpon>
+      <LastGenOutput>BroadwayModel.Context.cs</LastGenOutput>
     </Content>
     <Content Include="BroadwayModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>BroadwayModel.edmx</DependentUpon>
       <LastGenOutput>BroadwayModel.cs</LastGenOutput>
     </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

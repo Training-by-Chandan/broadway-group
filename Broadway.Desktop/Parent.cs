@@ -14,10 +14,19 @@ namespace Broadway.Desktop
     
     public partial class Parent
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Parent()
+        {
+            this.StudentParents = new HashSet<StudentParent>();
+        }
+    
         public int Id { get; set; }
         public string Name { get; set; }
         public int Type { get; set; }
         public string Phone { get; set; }
         public string Email { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<StudentParent> StudentParents { get; set; }
     }
 }

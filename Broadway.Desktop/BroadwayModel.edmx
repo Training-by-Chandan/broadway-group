@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="BroadwayModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="BroadwayModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Parent">
           <Key>
             <PropertyRef Name="Id" />
@@ -46,66 +46,84 @@
           <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="5" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'Broadway.dbo.StudentParentView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="StudentParentView">
-          <Key>
-            <PropertyRef Name="Name" />
-            <PropertyRef Name="FatherName" />
-            <PropertyRef Name="MotherName" />
-          </Key>
-          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="FatherName" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="MotherName" Type="nvarchar" MaxLength="50" Nullable="false" />
-        </EntityType>
-        <Function Name="NameCheck" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int">
-          <Parameter Name="name" Type="nvarchar(max)" Mode="In" />
-        </Function>
-        <Function Name="Procedure" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="primaryKey" Type="int" Mode="In" />
-          <Parameter Name="name" Type="nvarchar" Mode="In" />
-        </Function>
-        <Function Name="ProcTest" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="param1" Type="int" Mode="In" />
-          <Parameter Name="param2" Type="int" Mode="In" />
-        </Function>
+        <Association Name="FK_StudentParent_ToParent">
+          <End Role="Parent" Type="Self.Parent" Multiplicity="1" />
+          <End Role="StudentParent" Type="Self.StudentParent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Parent">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StudentParent">
+              <PropertyRef Name="ParentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentParent_ToStudent">
+          <End Role="Student" Type="Self.Student" Multiplicity="1" />
+          <End Role="StudentParent" Type="Self.StudentParent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StudentParent">
+              <PropertyRef Name="StudentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="BroadwayModelStoreContainer">
           <EntitySet Name="Parent" EntityType="Self.Parent" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Student" EntityType="Self.Student" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StudentParent" EntityType="Self.StudentParent" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Table1" EntityType="Self.Table1" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Table2" EntityType="Self.Table2" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="StudentParentView" EntityType="Self.StudentParentView" store:Type="Views" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [StudentParentView].[Name] AS [Name], 
-    [StudentParentView].[FatherName] AS [FatherName], 
-    [StudentParentView].[MotherName] AS [MotherName]
-    FROM [dbo].[StudentParentView] AS [StudentParentView]</DefiningQuery>
-          </EntitySet>
+          <AssociationSet Name="FK_StudentParent_ToParent" Association="Self.FK_StudentParent_ToParent">
+            <End Role="Parent" EntitySet="Parent" />
+            <End Role="StudentParent" EntitySet="StudentParent" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentParent_ToStudent" Association="Self.FK_StudentParent_ToStudent">
+            <End Role="Student" EntitySet="Student" />
+            <End Role="StudentParent" EntitySet="StudentParent" />
+          </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="BroadwayModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="Broadway_Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Parents" EntityType="BroadwayModel.Parent" />
+          <EntitySet Name="Students" EntityType="BroadwayModel.Student" />
+          <EntitySet Name="StudentParents" EntityType="BroadwayModel.StudentParent" />
+          <EntitySet Name="Table1" EntityType="BroadwayModel.Table1" />
+          <EntitySet Name="Table2" EntityType="BroadwayModel.Table2" />
+          <AssociationSet Name="FK_StudentParent_ToParent" Association="BroadwayModel.FK_StudentParent_ToParent">
+            <End Role="Parent" EntitySet="Parents" />
+            <End Role="StudentParent" EntitySet="StudentParents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentParent_ToStudent" Association="BroadwayModel.FK_StudentParent_ToStudent">
+            <End Role="Student" EntitySet="Students" />
+            <End Role="StudentParent" EntitySet="StudentParents" />
+          </AssociationSet>
+        </EntityContainer>
         <EntityType Name="Parent">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Type" Type="Int32" Nullable="false" />
           <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="StudentParents" Relationship="BroadwayModel.FK_StudentParent_ToParent" FromRole="Parent" ToRole="StudentParent" />
         </EntityType>
         <EntityType Name="Student">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Status" Type="Boolean" />
+          <NavigationProperty Name="StudentParents" Relationship="BroadwayModel.FK_StudentParent_ToStudent" FromRole="Student" ToRole="StudentParent" />
         </EntityType>
         <EntityType Name="StudentParent">
           <Key>
@@ -114,125 +132,99 @@ warning 6002: The table/view 'Broadway.dbo.StudentParentView' does not have a pr
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="StudentId" Type="Int32" Nullable="false" />
           <Property Name="ParentId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Parent" Relationship="BroadwayModel.FK_StudentParent_ToParent" FromRole="StudentParent" ToRole="Parent" />
+          <NavigationProperty Name="Student" Relationship="BroadwayModel.FK_StudentParent_ToStudent" FromRole="StudentParent" ToRole="Student" />
         </EntityType>
         <EntityType Name="Table1">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Table2">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="5" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityType Name="StudentParentView">
-          <Key>
-            <PropertyRef Name="Name" />
-            <PropertyRef Name="FatherName" />
-            <PropertyRef Name="MotherName" />
-          </Key>
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="FatherName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="MotherName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-        </EntityType>
-        <EntityContainer Name="BroadwayEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Parents" EntityType="Self.Parent" />
-          <EntitySet Name="Students" EntityType="Self.Student" />
-          <EntitySet Name="StudentParents" EntityType="Self.StudentParent" />
-          <EntitySet Name="Table1" EntityType="Self.Table1" />
-          <EntitySet Name="Table2" EntityType="Self.Table2" />
-          <EntitySet Name="StudentParentViews" EntityType="Self.StudentParentView" />
-          <FunctionImport Name="Procedure">
-            <Parameter Name="primaryKey" Mode="In" Type="Int32" />
-            <Parameter Name="name" Mode="In" Type="String" />
-          </FunctionImport>
-          <FunctionImport Name="ProcTest" ReturnType="Collection(BroadwayModel.ProcTest_Result)">
-            <Parameter Name="param1" Mode="In" Type="Int32" />
-            <Parameter Name="param2" Mode="In" Type="Int32" />
-          </FunctionImport>
-        </EntityContainer>
-        <ComplexType Name="ProcTest_Result">
-          <Property Type="Int32" Name="Id" Nullable="false" />
-          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="Email" Nullable="true" MaxLength="50" />
-          <Property Type="Boolean" Name="Status" Nullable="true" />
-        </ComplexType>
-      </Schema>
+        <Association Name="FK_StudentParent_ToParent">
+          <End Type="BroadwayModel.Parent" Role="Parent" Multiplicity="1" />
+          <End Type="BroadwayModel.StudentParent" Role="StudentParent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Parent">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StudentParent">
+              <PropertyRef Name="ParentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentParent_ToStudent">
+          <End Type="BroadwayModel.Student" Role="Student" Multiplicity="1" />
+          <End Type="BroadwayModel.StudentParent" Role="StudentParent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StudentParent">
+              <PropertyRef Name="StudentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="BroadwayModelStoreContainer" CdmEntityContainer="BroadwayEntities">
+        <EntityContainerMapping StorageEntityContainer="BroadwayModelStoreContainer" CdmEntityContainer="Broadway_Entities">
           <EntitySetMapping Name="Parents">
             <EntityTypeMapping TypeName="BroadwayModel.Parent">
               <MappingFragment StoreEntitySet="Parent">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Type" ColumnName="Type" />
-                <ScalarProperty Name="Phone" ColumnName="Phone" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Students">
             <EntityTypeMapping TypeName="BroadwayModel.Student">
               <MappingFragment StoreEntitySet="Student">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="StudentParents">
             <EntityTypeMapping TypeName="BroadwayModel.StudentParent">
               <MappingFragment StoreEntitySet="StudentParent">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="StudentId" ColumnName="StudentId" />
                 <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+                <ScalarProperty Name="StudentId" ColumnName="StudentId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Table1">
             <EntityTypeMapping TypeName="BroadwayModel.Table1">
               <MappingFragment StoreEntitySet="Table1">
-                <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Table2">
             <EntityTypeMapping TypeName="BroadwayModel.Table2">
               <MappingFragment StoreEntitySet="Table2">
-                <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="StudentParentViews">
-            <EntityTypeMapping TypeName="BroadwayModel.StudentParentView">
-              <MappingFragment StoreEntitySet="StudentParentView">
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="FatherName" ColumnName="FatherName" />
-                <ScalarProperty Name="MotherName" ColumnName="MotherName" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="Procedure" FunctionName="BroadwayModel.Store.Procedure" />
-          <FunctionImportMapping FunctionImportName="ProcTest" FunctionName="BroadwayModel.Store.ProcTest">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="BroadwayModel.ProcTest_Result">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
